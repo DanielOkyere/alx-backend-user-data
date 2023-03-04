@@ -3,6 +3,8 @@
 from typing import List
 import re
 import logging
+from os import environ
+import mysql.connector
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
@@ -27,6 +29,19 @@ def filter_datum(fields: List[str],
                          f'{m}={redaction}{separator}',
                          message)
     return message
+
+
+def get_db():
+    """Connects to secure database"""
+    username = environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
+    password = environ.get('PERSONAL_DATA_DB_PASSWORD', '')
+    host = environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
+    db_name = environ.get('PERSONAL_DATA_DB_NAME')
+    cnx = mysql.connector.connection.MySQLConnection(user=username,
+                                                      password=password,
+                                                      host=host,
+                                                      database=db_name)
+    return cnx
 
 
 def get_logger() -> logging.Logger:

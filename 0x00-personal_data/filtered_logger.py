@@ -31,7 +31,7 @@ def filter_datum(fields: List[str],
     return message
 
 
-def get_db():
+def get_db() -> mysql.connector.connection.MySQLConnection:
     """Connects to secure database"""
     username = environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
     password = environ.get('PERSONAL_DATA_DB_PASSWORD', '')

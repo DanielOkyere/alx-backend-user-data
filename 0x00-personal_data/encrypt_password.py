@@ -3,7 +3,7 @@
 import bcrypt
 
 
-def hash_password(password: str) -> str:
+def hash_password(password: str) -> bytes:
     """Expects string password and returns
     salt, hashpassword and byte string"""
     data = bcrypt.hashpw(password.encode(),

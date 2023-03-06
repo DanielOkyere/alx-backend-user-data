@@ -9,7 +9,7 @@ class Auth:
     """Class Auth
     Handles Authentication
     """
-    def require_path(self, path: str, excluded_paths: List[str]) -> bool:
+    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Validates endpont to require auth"""
         if path is None or excluded_paths is None or excluded_paths == []:
             return True

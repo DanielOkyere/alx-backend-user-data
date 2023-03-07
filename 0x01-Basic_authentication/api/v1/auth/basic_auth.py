@@ -19,3 +19,22 @@ class BasicAuth(Auth):
             if f_match is not None:
                 return f_match.group('token')
         return None
+
+    def decode_base64_authorization_header(
+        self,
+        base64_authorization_header: str
+    ) -> str:
+        """Decodes the value of Base64 string"""
+        if base64_authorization_header is None:
+            return None
+        if not isinstance(base64_authorization_header, str):
+            return None
+
+        try:
+            enc = base64_authorization_header.encode('utf-8')
+            dec64 = base64.b64decode(enc)
+            decoded = dec64.decode('utf-8')
+        except BaseException:
+            return None
+
+        return decoded

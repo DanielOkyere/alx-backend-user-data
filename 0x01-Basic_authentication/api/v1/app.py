@@ -49,7 +49,7 @@ def authenticate_user():
     exc_paths = [
         '/api/v1/status/',
         '/api/v1/unauthorized/',
-        '/api/v1/forbidden'
+        '/api/v1/forbidden/'
     ]
     if auth.require_auth(request.path, exc_paths):
         if auth.authorization_header(request) is None:

@@ -2,7 +2,7 @@
 """Empty Session"""
 from .auth import Auth
 from uuid import uuid4
-
+from models.user import User
 
 class SessionAuth(Auth):
     """Session Auth that inherits Auth"""
@@ -23,3 +23,8 @@ class SessionAuth(Auth):
            or session_id is None:
             return None
         return self.user_id_by_session_id.get(str(session_id))
+
+    def current_user(self, request=None):
+        """returns a user instance based on a cookie"""
+        user_id = self.user_id_for_session_id(self.session_cookie(request))
+        return User.get(user_id)

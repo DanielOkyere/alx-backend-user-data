@@ -16,3 +16,10 @@ class SessionAuth(Auth):
         new_key = str(uuid4())
         self. user_id_by_session_id[new_key] = user_id
         return new_key
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """Returns user based on a session ID"""
+        if not isinstance(session_id, str)\
+           or session_id is None:
+            return None
+        return self.user_id_by_session_id.get(str(session_id))

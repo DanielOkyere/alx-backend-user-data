@@ -30,7 +30,12 @@ def session_authentication() -> Tuple[str, int]:
         return res
     return jsonify({"error": "wrong password"}), 401
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route(
+    '/auth_session/logout',
+    methods=['DELETE'],
+    strict_slashes=False
+)
 def delete_session() -> Tuple[str, int]:
     """Delete sessions for user"""
     from api.v1.app import auth
